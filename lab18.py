@@ -32,11 +32,20 @@ print("\n=== Profit Metrics ===")
 print("Total Profit:", round(profit.sum(), 2))
 print("Average Profit:", round(profit.mean(), 2))
 print("Standard Deviation:", round(profit.std(), 2))
-# Task 5: Compare metrics between groups (e.g., Region)
-region_comparison = df.groupby('Region')[['Sales', 'Profit']].agg(['count', 'sum', 'mean', 'median', 'std'])
-print("Sales and Profit Comparison by Region:")
-print(region_comparison)
-# Focus on West vs East regions
-subset_comparison = region_comparison.loc[['West', 'East']]
-print("\nWest vs East Comparison:")
-print(subset_comparison)
+# Aggregation for the subset
+agg_results = {
+    'Count': subset['Sales'].count(),
+    'Total Sales': subset['Sales'].sum(),
+    'Average Sales': subset['Sales'].mean(),
+    'Median Sales': subset['Sales'].median(),
+    'Mode Sales': subset['Sales'].mode()[0],
+    'Std Dev (Sales)': subset['Sales'].std(),
+    'Min Sales': subset['Sales'].min(),
+    'Max Sales': subset['Sales'].max(),
+    'Total Profit': subset['Profit'].sum(),
+    'Average Profit': subset['Profit'].mean(),
+    'Std Dev (Profit)': subset['Profit'].std()
+}
+for k, v in agg_results.items():
+    print(f"{k}: {v}")
+
